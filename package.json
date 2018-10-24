@@ -1,0 +1,21 @@
+{
+  "name": "drapp",
+  "version": "1.0.0",
+  "description": "Patient management app for patients and doctors.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
