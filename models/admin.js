@@ -19,6 +19,10 @@ const AdminSchema = new Schema({
     lastName: {
         type: String,
         required: true
+    },
+	    accountCreated: {
+        type: Date,
+        default: Date.now
     }
 });
 
