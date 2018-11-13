@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const patients = require('./routes/api/patients');
 const dependents = require('./routes/api/dependents');
 const admins = require('./routes/api/admins');
+const doctor = require('./routes/api/doctor');
+const appointments = require('./routes/api/appointments');
+const facility = require('./routes/api/facility');
 
 // initialize express
 const app = express();
@@ -25,6 +28,9 @@ mongoose
 app.use('/api/patients', patients);
 app.use('/api/dependents', dependents);
 app.use('/api/admins', admins);
+app.use('/api/doctor', doctor);
+app.use('/api/appointments', appointments);
+app.use('/api/facility', facility);
 
 // run the server; will be deployed on heroku
 const port = process.env.PORT || 5000;
