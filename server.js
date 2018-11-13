@@ -8,6 +8,7 @@ const admins = require('./routes/api/admins');
 const doctor = require('./routes/api/doctor');
 const appointments = require('./routes/api/appointments');
 const facility = require('./routes/api/facility');
+const prescriptions = require('./routes/api/prescriptions');
 
 // initialize express
 const app = express();
@@ -31,6 +32,7 @@ app.use('/api/admins', admins);
 app.use('/api/doctor', doctor);
 app.use('/api/appointments', appointments);
 app.use('/api/facility', facility);
+app.use('/api/prescriptions', prescriptions);
 
 // run the server; will be deployed on heroku
 const port = process.env.PORT || 5000;
