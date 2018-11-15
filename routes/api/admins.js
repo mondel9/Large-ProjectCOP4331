@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 
 // admin model
 const Admin = require('../../models/admin');
+
+//salt
+BCRYPT_SALT_ROUNDS = 12;
 
 // @route GET api/admins
 // @description Get all admins
@@ -26,17 +30,17 @@ router.post('/', (req, res) => {
 	var badPass = "Cannot create account: Password needs";
 	
 	if(lowerCase.test(pass) === false){
-		console.log(1);
+		//console.log(1);
 		valid = false;
 		badPass = badPass + " lowercase characters,";
 	}
 	if(upperCase.test(pass) === false){
-		console.log(2);
+		//console.log(2);
 		valid = false;
 		badPass = badPass + " uppercase characters,";
 	}
 	if(numbers.test(pass) === false){
-		console.log(3);
+		//console.log(3);
 		valid = false;
 		badPass = badPass + " numbers,";
 	}
@@ -45,21 +49,35 @@ router.post('/', (req, res) => {
 		badPass = badPass + " not long enough (8 characters Minimum)";
 	}
 
-	console.log(valid);
+	//console.log(valid);
 	if(valid === true){
+	bcrypt.hash(req.body.password, BCRYPT_SALT_ROUNDS, function(err, hash) {
+    // Store hash in your password DB.
+	//console.log(hash);
     const newAdmin = new Admin({
         username: req.body.username,
-        password: req.body.password, 
+        password: hash, 
         firstName: req.body.firstName,
         lastName: req.body.lastName
     });
     newAdmin.save().then(admin => res.json(admin));
-	}
+	});//end of hash function
+	}//end of if
 	else{
 	res.json(badPass);
 	}
 	valid = true;
 });
+
+router.post('/login', function (req, res, next) { 
+
+
+});
+
+
+
+
+
 
 
 // @route DELETE api/admins/:id
