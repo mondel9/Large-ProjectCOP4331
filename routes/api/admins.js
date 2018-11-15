@@ -69,14 +69,29 @@ router.post('/', (req, res) => {
 	valid = true;
 });
 
-router.post('/login', function (req, res, next) { 
+router.post('/login', function (req, res){ 
+  var username = req.body.username;
+  var password = req.body.password;
 
-
+  //Admin.getUser(username)
+  Admin.findOne({username: username})
+    .then(function(user) {
+		//console.log(password);
+		//console.log(user.password);
+        return bcrypt.compare(password, user.password);
+    })
+    .then(function(samePassword) {
+		//console.log(samePassword);
+        if(samePassword === false) {
+            res.status(403).send();
+        }
+        res.send();
+    })
+    .catch(function(error){
+        console.log("Error authenticating user: ");
+        console.log(error);
+    });
 });
-
-
-
-
 
 
 
