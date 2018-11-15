@@ -60,7 +60,7 @@ router.put('/:id', (req, res) => {
            //apId: req.body.apId,
            //doctorId: req.body.doctorId,
         }, {new : true})
-    .then(appointments => res.json(applicationCache))
+    .then(appointments => res.json(appointments))
     .catch(err => res.status(404).json({ success: false }));
 });
 
