@@ -5,17 +5,17 @@ const router = express.Router();
 const Appointments = require('../../models/appointment')
 //id stuff can be replaced by seen by
 // @route GET api/appointments
-// @desc get appointments
+// @desc get all appointments
 // @access currently public
 router.get('/', (req, res) => {
     Appointments.find()
-     .sort({lastName : 1})
+     //.sort({lastName : 1}) **** need to sort by date.
      .then(appointments => res.json(appointments))
 });
 
 router.get('/search:id', (req, res) => {
-    Appointments.find({patient: req.params.patient})
-    .then(appointments => res.json(patient))
+    Appointments.find({patient: req.params.id})
+    .then(appointments => res.json(appointments))
 });
 
 // @route POST api/appointments
@@ -28,9 +28,9 @@ router.post('/', (req, res) => {
         seenBy: req.body.seenBy,
         createdBy: req.body.createdBy,
         notes: req.body.notes,
-        late: req.body.late,
-        apId: req.body.apId,
-        doctorId: req.body.doctorId,
+        late: req.body.late
+        //apId: req.body.apId,
+        //doctorId: req.body.doctorId,
     });
 
     newAppointments.save().then(appointments => res.json(appointments));
@@ -56,11 +56,11 @@ router.put('/:id', (req, res) => {
            seenBy: req.body.seenBy,
            createdBy: req.body.createdBy,
            notes: req.body.notes,
-           late: req.body.late,
-           apId: req.body.apId,
-           doctorId: req.body.doctorId,
+           late: req.body.late
+           //apId: req.body.apId,
+           //doctorId: req.body.doctorId,
         }, {new : true})
-    .then(appointments => res.json(applicationCache))
+    .then(appointments => res.json(appointments))
     .catch(err => res.status(404).json({ success: false }));
 });
 

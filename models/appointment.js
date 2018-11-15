@@ -12,7 +12,7 @@ const AppointmentSchema = new Schema({
     seenBy: mongoose.Schema.Types.ObjectId,
     createdBy: mongoose.Schema.Types.ObjectId,
     notes: {
-        type: String,
+        type: String
     },
     checkedIn: {
         type: Boolean,
@@ -20,14 +20,7 @@ const AppointmentSchema = new Schema({
     },
     late: {
         type: Boolean
-    },
-
-    // added but don't know if right
-    // i did with while looking at the erd
-    apId: {
-        type: String,
-        required: true
-    },
+    }
 });
 
 module.exports = Appointment = mongoose.model('appointment', AppointmentSchema);
