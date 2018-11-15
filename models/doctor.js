@@ -28,6 +28,10 @@ const DoctorSchema = new Schema({
         type: String,
         required: true
     },
+	accountCreated: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = Doctor = mongoose.model('doctor', DoctorSchema);

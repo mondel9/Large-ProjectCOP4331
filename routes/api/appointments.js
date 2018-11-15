@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 // Appointments model
-const Appointments = require('../../models/appointments')
+const Appointments = require('../../models/appointment')
 //id stuff can be replaced by seen by
 // @route GET api/appointments
 // @desc get appointments
