@@ -24,11 +24,25 @@ const InsuranceSchema = new Schema({
         type: String,
         required: true
     },
-    copay: {
-        office: Number,
-        RxGeneric: Number,
-        RxBrand: Number,
-        specialist: Number,
+    // co-pays
+    office: {
+        type: Number,
+        required: true
+    },
+    RxGeneric: {
+        type: Number,
+        required: true
+    },
+    RxBrand: {
+        type: Number,
+        required: true
+    },
+    specialist: {
+        type: Number,
+        required: true
+    },
+    ER: {
+        type: Number,
         required: true
     },
     dateEffective: {
