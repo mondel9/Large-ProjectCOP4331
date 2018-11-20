@@ -9,17 +9,16 @@ const AppointmentSchema = new Schema({
         type: Date,
         required: true
     },
-    seenBy: mongoose.Schema.Types.ObjectId,
-    createdBy: mongoose.Schema.Types.ObjectId,
-    notes: {
-        type: String
-    },
-    checkedIn: {
+    seenBy: String,     //doctorId from doctor model
+    createdBy: mongoose.Schema.Types.ObjectId,      // an admin _id
+    notes: String,      // reason for vist
+    checkedIn: {       
         type: Boolean,
-        required: true
+        default: false
     },
     late: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 });
 
