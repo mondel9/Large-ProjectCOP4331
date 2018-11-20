@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const patients = require('./routes/api/patients');
 const dependents = require('./routes/api/dependents');
@@ -24,6 +25,8 @@ mongoose
     .connect(db, {useNewUrlParser: true})
     .then(() => console.log('MongoDB connected..'))
     .catch(err => console.log(err));
+
+app.use(cors());
 
 // use the routes
 app.use('/api/patients', patients);
