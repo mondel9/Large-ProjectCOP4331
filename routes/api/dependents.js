@@ -25,13 +25,33 @@ router.post('/:id', (req, res) => {
         insurance: req.body.insurance,
         guardian: req.params.id
     });
-// adds dependents but doesn't update the guardian document. ********
-    newDependent.save()
-   // .then(Patient.findByIdAndUpdate(req.params.id, 
-     //   {dependents: true},
-      //  {$addToSet: {dependents: [newDependent.id]}},
-        //{new : true}))
-    .then(dependent => res.json(dependent));
+
+    newDependent.save().then(dependent => res.json(dependent));
+});
+
+// @route PUT api/dependents/:id
+// @description Update a patient's info
+router.put('/:id', (req, res) => {
+    Dependent.findByIdAndUpdate(req.params.id, 
+        { 
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            dob: req.body.dob,
+            ss: req.body.ss,
+            insurance: req.body.insurance,
+            guardian: req.body.guardian
+        }, {new : true})
+    .then(dependent => res.json(dependent))
+    .catch(err => res.status(404).json({ success: false }));
+});
+
+// @route DELETE api/dependents/:id
+// @description Delete a dependent by id
+router.delete('/:id', (req, res) => {
+    Dependent.findById(req.params.id)
+        .then(dependent => dependent.remove()
+        .then(() => res.json({ success: true }))
+        .catch(err => res.status(404).json({ success: false })));
 });
 
 module.exports = router;
