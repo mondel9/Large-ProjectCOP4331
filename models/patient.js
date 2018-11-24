@@ -22,11 +22,6 @@ const PatientSchema = new Schema({
     dob: Date,
     ss: Number,
     dependents: Boolean,
-    //[{
-        //type: mongoose.Schema.Types.ObjectId,
-        //ref: 'dependent',
-        //default: null
-    //}],
     email: String,
     phone: {
         type: String,

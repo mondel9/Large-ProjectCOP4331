@@ -5,16 +5,26 @@ const Schema = mongoose.Schema;
 
 const MedicalHistorySchema = new Schema({
     patientId: mongoose.Schema.Types.ObjectId,
-    ynQuestions: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ynQuestion'
-    }],
-    fillQuestions: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'fillQuestion'
-    }],
+    sex: String,
+    height: String,
+    weight: String, 
+    heartDisease: String,
+    highbPressure: String, 
+    stroke: String,
+    pacemaker: String,
+    respiratoryDisease: String,
+    siezures: String,
+    anemia: String,
+    liverDisease: String,
+    kidneyDisease: String,
+    diabetes: String,
+    cancer: String,
+    allergies: String,
+    alcohol: String,
+    smoke: String,
     complete: Boolean,
-    dateUpdated: Date
+    dateUpdated: Date, 
+    updatedBy: String       // a doctorid
 });
 
 module.exports = MedicalHistory = mongoose.model('medicalHistory', MedicalHistorySchema);
