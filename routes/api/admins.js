@@ -60,7 +60,19 @@ router.post('/', (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName
     });
-    newAdmin.save().then(admin => res.json(admin));
+    newAdmin.save(function(err) {
+    if (err) {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        // Duplicate username
+        return res.status(500).send({ succes: false, message: 'User already exist!' });
+      }
+
+      // Some other error
+      return res.status(500).send(err);
+    }
+	res.json(newAdmin);
+	}
+	);//.then(admin => res.json(admin));
 	});//end of hash function
 	}//end of if
 	else{
