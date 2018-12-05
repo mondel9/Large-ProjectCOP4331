@@ -5,6 +5,14 @@ const router = express.Router();
 // prescription model
 const Prescription = require('../../models/prescription');
 
+// @route GET api/prescriptions
+// @description Get all patients
+// @access public for now, need to add authentication ***
+router.get('/', (req, res) => {
+    Prescription.find()
+    .then(patients => res.json(patients))
+});
+
 // @route GET api/prescriptions/byDoctor:id
 // @description get all prescriptions by doctor id (who prescribed them)
 // @access add authentication
@@ -45,9 +53,9 @@ router.post('/', (req, res) => {
 
 // @route PUT api/prescriptions/:id
 // @description Update a patient's prescription by prescriptionid
-// @access 
+// @access
 router.put('/:id', (req, res) => {
-    Prescription.findByIdAndUpdate(req.params.id, 
+    Prescription.findByIdAndUpdate(req.params.id,
         {   Rx: req.body.Rx,
             name: req.body.name,
             quantity: req.body.quantity,

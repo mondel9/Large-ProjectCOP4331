@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 // @route GET api/patients/search:lastName&:dob **
 // @description get patients with the given last name and d.o.b
-// @access 
+// @access
 router.get('/search:lastName&:dob', (req, res) => {
     Patient.find({lastName: req.params.lastName, dob: req.params.dob})
     .then(patients => res.json(patients))
@@ -28,7 +28,7 @@ router.get('/search:lastName&:dob', (req, res) => {
 router.post('/', (req, res) => {
     const newPatient = new Patient({
         username: req.body.username,
-        password: req.body.password, 
+        password: req.body.password,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         dob: req.body.dob,
@@ -39,21 +39,21 @@ router.post('/', (req, res) => {
         address: req.body.address,
         insurance: req.body.insurance
     });
-    
+
     newPatient.save().then(patient => res.json(patient));
 });
 
 // @route PUT api/patients/:id
 // @description Update a patient's info
-// @access 
+// @access
 router.put('/:id', (req, res) => {
-    Patient.findByIdAndUpdate(req.params.id, 
+    Patient.findByIdAndUpdate(req.params.id,
         { username: req.body.username,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           dob: req.body.dob,
           ss: req.body.ss,
-          dependents: req.body.dependents, 
+          dependents: req.body.dependents,
           email : req.body.email,
           address: req.body.address,
           phone : req.body.phone,

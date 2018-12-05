@@ -46,7 +46,7 @@ const InsuranceSchema = new Schema({
         required: true
     },
     dateEffective: {
-        type: Date,
+        type: String,
         required: true
     }
 });

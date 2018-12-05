@@ -5,6 +5,14 @@ const router = express.Router();
 // medical history model
 const MedicalHistory = require('../../models/medicalHistory');
 
+
+// @route GET api/medicalHistory
+// @description Get all medical history
+router.get('/', (req, res) => {
+    MedicalHistory.find()
+    .then(medHistory => res.json(medHistory))
+});
+
 // @route GET api/medicalHistory/:id
 // @description Get a patient's medical history by patientid
 router.get('/:id', (req, res) => {
@@ -19,9 +27,9 @@ router.post('/', (req, res) => {
         patientId: req.body.patientId,
         sex: req.body.sex,
         height: req.body.height,
-        weight: req.body.weight, 
+        weight: req.body.weight,
         heartDisease: req.body.heartDisease,
-        highbPressure: req.body.highbPressure, 
+        highbPressure: req.body.highbPressure,
         stroke: req.body.stroke,
         pacemaker: req.body.pacemaker,
         respiratoryDisease: req.body.respiratoryDisease,
@@ -35,8 +43,8 @@ router.post('/', (req, res) => {
         alcohol: req.body.alcohol,
         smoke: req.body.smoke,
         complete: req.body.complete,
-        dateUpdated: req.body.dateUpdated, 
-        updatedBy: req.body.updatedBy      
+        dateUpdated: req.body.dateUpdated,
+        updatedBy: req.body.updatedBy
     });
 
     newMedHistory.save().then(medHistory => res.json(medHistory));
@@ -45,13 +53,13 @@ router.post('/', (req, res) => {
 // @route PUT api/medicalHistory/:id
 // @descr Update a patient's med history by medhistory _id field
 router.put('/:id', (req, res) => {
-    MedicalHistory.findByIdAndUpdate(req.params.id, 
+    MedicalHistory.findByIdAndUpdate(req.params.id,
         {
             sex: req.body.sex,
             height: req.body.height,
-            weight: req.body.weight, 
+            weight: req.body.weight,
             heartDisease: req.body.heartDisease,
-            highbPressure: req.body.highbPressure, 
+            highbPressure: req.body.highbPressure,
             stroke: req.body.stroke,
             pacemaker: req.body.pacemaker,
             respiratoryDisease: req.body.respiratoryDisease,
@@ -65,7 +73,7 @@ router.put('/:id', (req, res) => {
             alcohol: req.body.alcohol,
             smoke: req.body.smoke,
             complete: req.body.complete,
-            dateUpdated: req.body.dateUpdated, 
+            dateUpdated: req.body.dateUpdated,
             updatedBy: req.body.updatedBy
         }, {new: true})
     .then(medHistory => res.json(medHistory))
@@ -75,7 +83,7 @@ router.put('/:id', (req, res) => {
 // @route DELETE api/medicalHistory/:id
 // @description Delete insurance entry by medhistory _id field
 router.delete('/:id', (req, res) => {
-    MedicalHistory.find(req.params.id)
+    MedicalHistory.findById(req.params.id)
         .then(medHistory => medHistory.remove()
         .then(() => res.json({ success: true }))
         .catch(err => res.status(404).json({ success: false })));

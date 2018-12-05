@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
 	var pass = req.body.password;
 	var valid = true;
 	var badPass = "Cannot create account: Password needs";
-	
+
 	if(lowerCase.test(pass) === false){
 		//console.log(1);
 		valid = false;
@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
 	//console.log(hash);
     const newAdmin = new Admin({
         username: req.body.username,
-        password: hash, 
+        password: hash,
         firstName: req.body.firstName,
         lastName: req.body.lastName
     });
@@ -69,7 +69,7 @@ router.post('/', (req, res) => {
 	valid = true;
 });
 
-router.post('/login', function (req, res){ 
+router.post('/login', function (req, res){
   var username = req.body.username;
   var password = req.body.password;
 

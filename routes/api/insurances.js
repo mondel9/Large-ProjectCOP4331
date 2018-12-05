@@ -5,6 +5,13 @@ const router = express.Router();
 // insurance model
 const Insurance = require('../../models/insurance');
 
+// @route GET api/insurances
+// @description Get all insurances
+router.get('/', (req, res) => {
+    Insurance.find()
+    .then(insurance => res.json(insurance))
+});
+
 // @route GET api/insurances/:id
 // @description Get a patient's insurance info by patientid
 router.get('/:id', (req, res) => {
@@ -35,7 +42,7 @@ router.post('/', (req, res) => {
 // @route PUT api/insurances/:id
 // @description Update a patient's insurance info by patientid
 router.put('/:id', (req, res) => {
-    Insurance.findByIdAndUpdate(req.params.id, 
+    Insurance.findByIdAndUpdate(req.params.id,
         {
             provider: req.body.provider,
             groupNum: req.body.groupNum,
@@ -48,7 +55,7 @@ router.put('/:id', (req, res) => {
             ER: req.body.ER,
             dateEffective: req.body.dateEffective
         }, {new: true})
-    .then(insurance => res.json(insurance))
+    .then(insurance => res.json({ success: true }))
     .catch(err => res.status(404).json({ success: false }));
 });
 
