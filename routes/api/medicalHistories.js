@@ -75,7 +75,7 @@ router.put('/:id', (req, res) => {
 // @route DELETE api/medicalHistory/:id
 // @description Delete insurance entry by medhistory _id field
 router.delete('/:id', (req, res) => {
-    MedicalHistory.find(req.params.id)
+    MedicalHistory.findById(req.params.id)
         .then(medHistory => medHistory.remove()
         .then(() => res.json({ success: true }))
         .catch(err => res.status(404).json({ success: false })));
