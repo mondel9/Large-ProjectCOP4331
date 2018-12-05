@@ -58,8 +58,7 @@ router.post('/', (req, res) => {
 		valid = false;
 		badPass = badPass + " not long enough (8 characters Minimum)";
 	}
-
-	//console.log(valid);
+	
 	if(valid === true){
 	bcrypt.hash(req.body.password, BCRYPT_SALT_ROUNDS, function(err, hash) {
     // Store hash in your password DB.
@@ -72,7 +71,19 @@ router.post('/', (req, res) => {
         lastName: req.body.lastName,
         doctorId: req.body.doctorId,
     });
-    newDoctor.save().then(doctor => res.json(doctor));
+    newDoctor.save(function(err) {
+    if (err) {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        // Duplicate username
+        return res.status(500).send({ success: false, message: 'User already exist!' });
+      }
+
+      // Some other error
+      return res.status(500).send(err);
+    }
+	res.json(newDoctor);
+	}
+	);//.then(admin => res.json(admin));
 	});//end of hash function
 	}//end of if
 	else{

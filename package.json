@@ -1,6 +1,7 @@
 {
   "name": "drapp",
   "version": "1.0.0",
+  "engines" : {"node": "10.11.0", "npm": "6.4.1"},
   "description": "Patient management app for patients and doctors.",
   "main": "server.js",
   "scripts": {
